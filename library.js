@@ -76,13 +76,13 @@ function sortByProp(prop) {
 
 const modal = document.getElementById("modal");
 const addBookBtn = document.getElementById("add-book-btn");
-const closeBtn = document.getElementById("close");
+const ModalCloseBtn = document.getElementById("modal-close");
 
 addBookBtn.onclick = () => {
     modal.style.display = "flex";
 }
 
-closeBtn.onclick = () => {
+ModalCloseBtn.onclick = () => {
     modal.style.display = "none";
 }
 
@@ -92,32 +92,12 @@ modal.onsubmit = () => {
     return false;
 }
 
-window.addEventListener('change', (e) => {
-    let sorted;
+
+// Chage card layout on sort-by selection
+window.addEventListener('change', () => {
     const sortBy = document.getElementById("sort-by").value;
-    switch (sortBy) {
-        case 'title':
-            sorted = myLibrary.slice(0).sort(sortByProp('title'));
-            return createCards(sorted);
-            
-        case 'author':
-            sorted = myLibrary.slice(0).sort(sortByProp('author'));
-            return createCards(sorted);
 
-        case 'genre':
-            sorted = myLibrary.slice(0).sort(sortByProp('genre'));
-            return createCards(sorted);
-
-        case 'pages':
-            sorted = myLibrary.slice(0).sort(sortByProp('pages'));
-            return createCards(sorted);
-
-        case 'original':
-            return createCards(myLibrary);
-    
-        default:
-            return createCards(myLibrary);
-    }
+    createCards(myLibrary.slice(0).sort(sortByProp(sortBy)));
 });
 
 window.onload(createCards(myLibrary)); // Remove after styling/testing
