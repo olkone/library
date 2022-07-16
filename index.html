@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./library.js" defer></script>
+</head>
+<body>
+    <h1>Library</h1>
+    <div id="display">
+
+    </div>
+    <form name="newBookForm" onsubmit="addBook(); return false;">
+        <fieldset class="formgroup">
+            <legend>Book Information:</legend>
+
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" class="input text" required>
+        
+            <label for="author">Author</label>
+            <input type="text" name="author" class="input text" required>
+     
+            <label for="genre">Genre</label>
+            <select name="genre">
+                <option value="adventure">Adventure</option>
+                <option value="childrens">Children's</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="fiction">Fiction</option>
+                <option value="non-fiction">Non-Fiction</option>
+                <option value="romance">Romance</option>
+                <option value="sci-fi">Sci-Fi</option>
+                <option value="young-adult">Young Adult</option>
+            </select>
+
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" class="input number">
+        </fieldset>
+        <fieldset class="formgroup">
+            <legend>Have you read this book?</legend>
+            <input type="checkbox" name="status" class="input check">
+        </fieldset>
+        <button type="submit">Add Book</button>
+    </form>
+    <div id="card-container">
+
+    </div>
+</body>
+</html>
