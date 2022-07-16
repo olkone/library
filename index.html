@@ -9,11 +9,23 @@
     <script src="./library.js" defer></script>
 </head>
 <body>
-    <h1>Library</h1>
-    <div id="display">
+    <header>
+        <h1>Library</h1>
+        <fieldset>
+            <label for="sort-by">Sort by:</label>
+            <select name="sort-by" id="sort-by">
+                <option value="original">order added</option>
+                <option value="title">title</option>
+                <option value="author">author</option>
+                <option value="genre">genre</option>
+                <option value="pages">number of pages</option>
+            </select>
+        </fieldset>
 
-    </div>
-    <form name="newBookForm" onsubmit="addBook(); return false;">
+        <button id="add-book-btn">Add Book</button>
+    </header>
+    <form id="modal" name="newBookForm">
+        <span id="close">&times;</span>
         <fieldset class="formgroup">
             <legend>Book Information:</legend>
 
@@ -44,10 +56,10 @@
             <legend>Have you read this book?</legend>
             <input type="checkbox" name="status" class="input check">
         </fieldset>
-        <button type="submit">Add Book</button>
+        <button id="submit-btn" type="submit">Add Book</button>
     </form>
-    <div id="card-container">
 
-    </div>
+
+    <div id="card-container"></div>
 </body>
 </html>
