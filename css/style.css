@@ -1,0 +1,21 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: gray;
+}
+
+#card-container {
+  border: 1px solid red;
+}
+#card-container .card {
+  background-color: white;
+  width: 300px;
+}
+#card-container .card p {
+  color: blue;
+}
+
+/*# sourceMappingURL=style.css.map */
