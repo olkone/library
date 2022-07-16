@@ -20,6 +20,10 @@ header {
   justify-content: space-between;
 }
 
+*.close {
+  cursor: pointer;
+}
+
 #modal {
   display: none;
   position: fixed;
@@ -30,9 +34,6 @@ header {
   left: 50%;
   transform: translate(-50%, -30%);
   background-color: white;
-}
-#modal #close {
-  cursor: pointer;
 }
 
 #card-container {
