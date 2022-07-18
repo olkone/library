@@ -5,52 +5,188 @@ body {
   margin: 0;
   padding: 0;
   z-index: 0;
-  background-color: gray;
+  background-color: white;
+  font-family: "Poppins", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
-  display: grid;
-  grid-template-rows: 10% 1fr;
+  display: flex;
+  flex: auto;
+  flex-flow: column nowrap;
+  position: relative;
 }
 
 header {
-  grid-area: 1/1;
-  display: inline-flex;
+  display: flex;
   flex: auto;
+  flex-flow: row wrap;
   justify-content: space-between;
+  background-color: rgb(201, 201, 201);
+  color: black;
+  position: fixed;
+  height: 72px;
+  width: 100%;
+  z-index: 1;
+}
+header h1 {
+  font-size: 2rem;
+  left: 40px;
+  margin: auto;
+}
+header fieldset {
+  border: none;
+  margin: auto;
+}
+header button {
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(87, 182, 150);
+  color: white;
+  height: 50px;
+  width: 100px;
+  margin: auto;
 }
 
+* button,
+*.card-close,
 *.close {
   cursor: pointer;
 }
 
 #modal {
-  display: none;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: max-content;
+  column-gap: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   height: max-content;
-  width: 400px;
+  width: min(500px, 85vw);
   top: 30%;
   left: 50%;
   transform: translate(-50%, -30%);
+  align-items: center;
+  background-color: rgb(168, 183, 219);
+  border-radius: 20px;
+  color: black;
+  font-size: 1rem;
+  text-align: end;
+}
+#modal span {
+  grid-area: 1/1;
+  font-size: 1.6rem;
+  text-align: center;
+  margin: 10px 0 0 0;
+}
+#modal span:hover {
+  transform: scale(1.1);
+}
+#modal span:active {
+  transform: scale(0.9);
+}
+#modal p {
+  grid-area: 2/span 2;
+  text-align: center;
+  margin: -40px 0 0 0;
+}
+#modal label {
+  margin: 1.2rem 10px 1.2rem 20px;
+}
+#modal input,
+#modal select {
+  margin-right: 10%;
+  height: 1.8rem;
+  font-size: 1rem;
+  border: none;
+}
+#modal label:nth-of-type(1) {
+  grid-area: 3/1;
+}
+#modal input:nth-of-type(1) {
+  grid-area: 3/2;
+}
+#modal label:nth-of-type(2) {
+  grid-area: 4/1;
+}
+#modal input:nth-of-type(2) {
+  grid-area: 4/2;
+}
+#modal label:nth-of-type(3) {
+  grid-area: 5/1;
+}
+#modal select {
+  grid-area: 5/2;
+}
+#modal label:nth-of-type(4) {
+  grid-area: 6/1;
+}
+#modal input:nth-of-type(3) {
+  grid-area: 6/2;
+  margin-right: 60%;
+}
+#modal label:nth-of-type(5) {
+  grid-area: 7/1;
+}
+#modal input:nth-of-type(4) {
+  grid-area: 7/2;
+  justify-self: left;
+}
+#modal button {
+  grid-area: 8/2;
   background-color: white;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  font-size: 1rem;
+  margin: 1rem auto;
+  height: 50px;
+  width: 50%;
 }
 
 #card-container {
-  grid-area: 2/1;
-  border: 1px solid red;
   display: flex;
-  flex: auto;
+  flex: 0;
   flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin-top: 82px;
 }
 #card-container .card {
-  background-color: white;
-  height: 250px;
-  width: 200px;
+  background-color: rgb(57, 57, 57);
+  border-radius: 20px;
+  color: white;
+  display: grid;
+  grid-template-rows: max-content repeat(4, 1fr);
+  height: 300px;
+  min-width: 240px;
+  max-width: 240px;
   margin: 20px;
+  position: relative;
 }
 #card-container .card p {
-  color: blue;
+  padding: 0 10px;
+}
+#card-container .card p:first-of-type {
+  background-color: rgb(92, 92, 92);
+  border-radius: 20px 20px 0 0;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+}
+#card-container .card p:nth-child(3)::before {
+  content: "Genre: ";
+}
+#card-container .card p:nth-child(4)::after {
+  content: " pages";
+}
+#card-container .card button {
+  position: absolute;
+  right: 6%;
+  bottom: 3%;
+  height: 30px;
+  width: max-content;
+  border: 1px solid white;
+  border-radius: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
