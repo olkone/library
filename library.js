@@ -13,7 +13,7 @@ const modal = document.getElementById("modal");
 
 const addBookBtn = document.getElementById("add-book-btn");
 const ModalCloseBtn = document.getElementById("modal-close");
-const cardCloseBtns = document.getElementsByClassName(".card-close");
+const cardDeleteBtns = document.getElementsByClassName(".card-delete");
 const modalTitle = document.getElementById("title");
 
 let id = -1;
@@ -33,16 +33,17 @@ function displayNewBook() {
     const cardContainer = document.querySelector('#card-container');
     const lastEntry = myLibrary.slice(-1)[0];
     const newCard = document.createElement('div');
-    const closeBtn = createCardButton('close', index);
+    const delBtn = createCardButton('delete', index);
     const editBtn = createCardButton('edit', index);
-    
+    const btnContainer = document.createElement('div');
+
     newCard.classList.add("card");
     newCard.setAttribute("data-id", index);
 
     createCardContent(lastEntry, newCard);
     
-    newCard.appendChild(closeBtn);
-    newCard.appendChild(editBtn);
+    createButtonContainer(btnContainer, editBtn, delBtn, newCard);
+
     cardContainer.appendChild(newCard);
 }
 
@@ -62,6 +63,12 @@ function createCardButton(name, index) {
     newButton.setAttribute('data-id', index);
 
     return newButton;
+}
+
+function createButtonContainer(newDiv, btn1, btn2, container) {
+    newDiv.appendChild(btn1);
+    newDiv.appendChild(btn2);
+    container.appendChild(newDiv);
 }
 
 // Delete card and book from myLibrary
@@ -104,7 +111,7 @@ function clearForm() {
 }
 
 document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('card-close')) {
+    if (e.target.classList.contains('card-delete')) {
         deleteCard(e.target.getAttribute('data-id'));
     }
 });
@@ -130,12 +137,13 @@ modal.onsubmit = () => {
 
 // Chage card layout on sort-by selection
 sortBy.addEventListener('change', () => {
-    createCards(myLibrary.slice(0).sort(sortByProp(sortBy.value)));
+    //createCards(myLibrary.slice(0).sort(sortByProp(sortBy.value)));
+    return;
 });
 
 
 // TODO:
-// Clear form after submission
+// Add edit function
 // Add check array for duplicates function
 // Capitalize, trim white space on entries
 // Figure out how to sort cards without destroying/recreating them
