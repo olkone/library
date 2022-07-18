@@ -1,19 +1,37 @@
-$main-background: white;
+$dark: #231f20;
+$dark-gray: #353535;
 
-$header-background: rgb(201, 201, 201);
-$header-text: black;
-$header-button-background: rgb(87, 182, 150);
+$main-background: rgb(240, 240, 240);
+
+$header-background: white;
+$header-text: #353535;
+$header-button-background: #41ad38;
 $header-button-text: white;
+$header-shadow: 0 5px 10px rgba(0, 0, 0, 0.188);
 
-$card-text: white;
-$card-background: rgb(57, 57, 57);
-$card-header-color: rgb(92, 92, 92);
-$card-button-border: 1px solid white;
 
-$modal-background: rgb(168, 183, 219);
-$modal-text: black;
+$card-text: #353535;
+$card-background: white;
+$card-header-color: #454ade;
+$card-title-text: white;
+$card-border: none;
+$card-shadow: 3px 4px 6px rgba(0, 0, 0, 0.168);
+
+$card-button-border: none;
+$card-button-text: #353535;
+$card-button-background: rgb(233, 233, 233);
+
+$card-button-hover: #e24b67;
+$card-button-hover-text: white;
+
+
+$modal-background: #f5d41b;
+$modal-text: #353535;
+$modal-border: none;
+$modal-shadow: 4px 4px 4px rgba(0, 0, 0, 0.514);
+
 $modal-button-background: white;
-$modal-button-text: black;
+$modal-button-text: #231f20;
 $modal-button-border: none;
 $input-border: none;
 $input-focus: 1px solid rgb(192, 117, 94);
@@ -40,11 +58,12 @@ body {
 
 header {
     display: flex;
-    flex: auto;
+    flex: 1 1;
     flex-flow: row wrap;
     justify-content: space-between;
 
     background-color: $header-background;
+    box-shadow: $header-shadow;
     color: $header-text;
     position: fixed;
     height: 72px;
@@ -54,25 +73,38 @@ header {
     h1 {
         font-size: 2rem;
         left: 40px;
-        margin: auto;
+        margin: auto 40px;
+        width: max-content;
     }
 
     fieldset {
+        display: none;
         border: none;
         margin: auto;
+        width: max-content;
     }
 
     button {
         border: none;
-        border-radius: 10px;
+        border-radius: 100%;
         background-color: $header-button-background;
         color: $header-button-text;
         
+        font-size: 2rem;
         height: 50px;
-        width: 100px;
-        margin: auto;
+        width: 50px;
+        margin: auto 40px;
+
+        transition-duration: 200ms;
     }
 
+    button:hover {
+        transform: rotate(90deg);
+    }
+
+    button:active {
+        background-color: darken($header-button-background, 15%);
+    }
 }
 
 *button,
@@ -81,10 +113,17 @@ header {
     cursor: pointer;
 }
 
-
+@keyframes fade-in {
+    0% {transform: translate(-50%, -40%);
+        opacity: 0;
+    }
+    100% {transform: translate(-50%, -40%);
+        opacity: 1;
+    }
+}
 
 #modal {
-    display: grid;
+    display: none;
     grid-template-columns: max-content 1fr;
     grid-template-rows: max-content;
 
@@ -94,13 +133,16 @@ header {
     z-index: 2;
     height: max-content;
     width: min(500px, 85vw);
-    top: 30%;
+    top: 40%;
     left: 50%;
-    transform: translate(-50%, -30%);
+
+    animation: fade-in 150ms forwards;
 
     align-items: center;
     background-color: $modal-background;
+    border: $modal-border;
     border-radius: 20px;
+    box-shadow: $modal-shadow;
     color: $modal-text;
     font-size: 1rem;
     text-align: end;
@@ -122,6 +164,7 @@ header {
 
     p {
         grid-area: 2 / span 2;
+        font-size: 1.3rem;
         text-align: center;
         margin: -40px 0 0 0;
     }
@@ -170,10 +213,14 @@ header {
 
     label:nth-of-type(5) {
         grid-area: 7 / 1;
+        margin-top: 0;
+        margin-bottom: 0;
+        align-self: center;
     }
     input:nth-of-type(4) {
         grid-area: 7 / 2;
         justify-self:left;
+        
     }
 
     button {
@@ -184,9 +231,18 @@ header {
         border-radius: 10px;
         color: $modal-button-text;
         font-size: 1rem;
-        margin: 1rem auto;
+        margin: 0 auto 1rem auto;
         height: 50px;
         width: 50%;
+    }
+
+    button:hover {
+        background-color: darken($modal-button-background, 7%);
+    }
+
+    button:active {
+        background-color: darken($modal-button-background, 20%);
+      
     }
 }
 
@@ -194,13 +250,16 @@ header {
     display: flex;
     flex: 0;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    
+    justify-content: flex-start;
 
-    margin-top: 82px;
+    margin: 82px 5%;
 
     .card {
         background-color: $card-background;
         border-radius: 20px;
+        border: $card-border;
+        box-shadow: $card-shadow;
         color: $card-text;
 
         display: grid;
@@ -219,6 +278,7 @@ header {
         p:first-of-type {
             background-color: $card-header-color;
             border-radius: 20px 20px 0 0;
+            color: $card-title-text;
             font-size: 1.2rem;
             margin: 0;
             padding: 10px 0;
@@ -241,8 +301,18 @@ header {
             height: 30px;
             width: max-content;
 
+            background-color: $card-button-background;
             border: $card-button-border;
             border-radius: 10px;
+            color: $card-button-text;
+
+            transition-duration: 150ms;
+        }
+
+        button:hover {
+            background-color: $card-button-hover;
+            color: $card-button-hover-text;
+            
         }
 
     }
