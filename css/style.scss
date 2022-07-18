@@ -11,6 +11,7 @@ $header-shadow: 0 5px 10px rgba(0, 0, 0, 0.188);
 
 
 $card-text: #353535;
+$card-light-text: #818181;
 $card-background: white;
 $card-header-color: #454ade;
 $card-title-text: white;
@@ -21,8 +22,10 @@ $card-button-border: none;
 $card-button-text: #353535;
 $card-button-background: rgb(233, 233, 233);
 
-$card-button-hover: #e24b67;
-$card-button-hover-text: white;
+$edit-button-hover: #37b4a9;
+$edit-button-hover-text: white;
+$delete-button-hover: #e24b67;
+$delete-button-hover-text: white;
 
 
 $modal-background: #f5d41b;
@@ -108,7 +111,7 @@ header {
 }
 
 *button,
-*.card-close,
+*.card-delete,
 *.close {
     cursor: pointer;
 }
@@ -211,20 +214,22 @@ header {
         margin-right: 60%;
     }
 
-    label:nth-of-type(5) {
-        grid-area: 7 / 1;
-        margin-top: 0;
-        margin-bottom: 0;
-        align-self: center;
-    }
-    input:nth-of-type(4) {
-        grid-area: 7 / 2;
-        justify-self:left;
+    #radio-btns {
+        grid-area: 7 / span 2;
+
+        display: flex;
+        flex: auto;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;   
         
+        input {
+            margin: auto 20px auto -3px;
+        }
     }
 
     button {
-        grid-area: 8 / 2;
+        grid-area: 8 / span 2;
         
         background-color: $modal-button-background;
         border: $modal-button-border;
@@ -263,12 +268,13 @@ header {
         color: $card-text;
 
         display: grid;
-        grid-template-rows: max-content repeat(4, 1fr);
+        grid-template-rows: max-content;
+        grid-auto-rows: 1fr;
 
-        height: 300px;
+        height: min(320px, 400px);
         min-width: 240px;
         max-width: 240px;
-        margin: 20px;
+        margin: 10px;
         position: relative;
 
         p {
@@ -283,37 +289,67 @@ header {
             margin: 0;
             padding: 10px 0;
             text-align: center;
-            
+        }
+
+        p:last-of-type {
+            display: none;
+        }
+
+        p:nth-child(2)::before {
+            content: "by ";
         }
 
         p:nth-child(3)::before {
-            content: "Genre: ";
+            content: "genre: ";
         }
 
-        p:nth-child(4)::after {
-            content: " pages";
+        p:nth-child(4)::before {
+            content: "pages: ";
         }
 
-        button {
-            position: absolute;
-            right: 6%;
-            bottom: 3%;
-            height: 30px;
-            width: max-content;
-
-            background-color: $card-button-background;
-            border: $card-button-border;
-            border-radius: 10px;
-            color: $card-button-text;
-
-            transition-duration: 150ms;
+        p:nth-child(5)::before {
+            content: "status: "
         }
 
-        button:hover {
-            background-color: $card-button-hover;
-            color: $card-button-hover-text;
+        *::before {
+            color: $card-light-text;
+        }
+
+        div {
+
+            display: inline-flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-right: 10px;
+
+            button {
+                height: 30px;
+                width: 60px;
+                background-color: $card-button-background;
+                border: $card-button-border;
+                border-radius: 10px;
+                color: $card-button-text;
+                transition-duration: 150ms;
+            }
             
-        }
+            .card-edit:hover {
+                background-color: $edit-button-hover;
+                color: $edit-button-hover-text;
+            }
 
+            .card-edit:active {
+                background-color: darken($edit-button-hover, 10%);
+            }
+    
+            .card-delete:hover {
+                background-color: $delete-button-hover;
+                color: $delete-button-hover-text;
+            }
+
+            .card-delete:active {
+                background-color: darken($delete-button-hover, 10%);
+            }
+
+        }
     }
 }

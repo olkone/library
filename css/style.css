@@ -60,7 +60,7 @@ header button:active {
 }
 
 * button,
-*.card-close,
+*.card-delete,
 *.close {
   cursor: pointer;
 }
@@ -149,18 +149,19 @@ header button:active {
   grid-area: 6/2;
   margin-right: 60%;
 }
-#modal label:nth-of-type(5) {
-  grid-area: 7/1;
-  margin-top: 0;
-  margin-bottom: 0;
-  align-self: center;
+#modal #radio-btns {
+  grid-area: 7/span 2;
+  display: flex;
+  flex: auto;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
 }
-#modal input:nth-of-type(4) {
-  grid-area: 7/2;
-  justify-self: left;
+#modal #radio-btns input {
+  margin: auto 20px auto -3px;
 }
 #modal button {
-  grid-area: 8/2;
+  grid-area: 8/span 2;
   background-color: white;
   border: none;
   border-radius: 10px;
@@ -191,11 +192,12 @@ header button:active {
   box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.168);
   color: #353535;
   display: grid;
-  grid-template-rows: max-content repeat(4, 1fr);
-  height: 300px;
+  grid-template-rows: max-content;
+  grid-auto-rows: 1fr;
+  height: 320px;
   min-width: 240px;
   max-width: 240px;
-  margin: 20px;
+  margin: 10px;
   position: relative;
 }
 #card-container .card p {
@@ -210,27 +212,52 @@ header button:active {
   padding: 10px 0;
   text-align: center;
 }
+#card-container .card p:last-of-type {
+  display: none;
+}
+#card-container .card p:nth-child(2)::before {
+  content: "by ";
+}
 #card-container .card p:nth-child(3)::before {
-  content: "Genre: ";
+  content: "genre: ";
 }
-#card-container .card p:nth-child(4)::after {
-  content: " pages";
+#card-container .card p:nth-child(4)::before {
+  content: "pages: ";
 }
-#card-container .card button {
-  position: absolute;
-  right: 6%;
-  bottom: 3%;
+#card-container .card p:nth-child(5)::before {
+  content: "status: ";
+}
+#card-container .card *::before {
+  color: #818181;
+}
+#card-container .card div {
+  display: inline-flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+#card-container .card div button {
   height: 30px;
-  width: max-content;
+  width: 60px;
   background-color: rgb(233, 233, 233);
   border: none;
   border-radius: 10px;
   color: #353535;
   transition-duration: 150ms;
 }
-#card-container .card button:hover {
+#card-container .card div .card-edit:hover {
+  background-color: #37b4a9;
+  color: white;
+}
+#card-container .card div .card-edit:active {
+  background-color: #2b8d84;
+}
+#card-container .card div .card-delete:hover {
   background-color: #e24b67;
   color: white;
+}
+#card-container .card div .card-delete:active {
+  background-color: #d72344;
 }
 
 /*# sourceMappingURL=style.css.map */
