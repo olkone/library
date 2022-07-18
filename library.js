@@ -1,13 +1,23 @@
 let myLibrary = [
-    {title: '3', author: 'BB', genre: 'adventure', pages: '123', status: 'on'},
-    {title: '1', author: 'DD', genre: 'childrens', pages: '234'},
-    {title: '4', author: 'GG', genre: 'comedy', pages: '345', status: 'on'},
-    {title: '3', author: 'AA', genre: 'drama', pages: '456'},
-    {title: '3', author: 'CC', genre: 'adventure', pages: '123', status: 'on'},
-    {title: '4', author: 'EE', genre: 'childrens', pages: '234'},
-    {title: '1', author: 'HH', genre: 'comedy', pages: '345', status: 'on'},
-    {title: '5', author: 'FF', genre: 'drama', pages: '456'},
+    {title: 'First Title', author: 'Brad Brad', genre: 'adventure', pages: '123'},
+    {title: 'Second Title', author: 'Dig Dub', genre: 'childrens', pages: '234'},
+    {title: 'Third Title', author: 'Georgia Gold', genre: 'comedy', pages: '345'},
+    {title: 'Fourth Title', author: 'Alma Aaron', genre: 'drama', pages: '456'},
+    {title: 'Really Super Long Fifth Title', author: 'Carter Cat', genre: 'adventure', pages: '123'},
+    {title: 'Realy Extra Super Duper Long Title: The Sixth', author: 'EE', genre: 'childrens', pages: '234'},
+    {title: 'Seven', author: 'Helen Hunter', genre: 'comedy', pages: '345'},
+    {title: 'This is the Eighth Book', author: 'Frankie Freallylonglastname', genre: 'drama', pages: '456'},
 ];
+
+const cardContainer = document.querySelector('#card-container');
+const cards = document.querySelectorAll(".card");
+const sortBy = document.getElementById("sort-by");
+const modal = document.getElementById("modal");
+
+const addBookBtn = document.getElementById("add-book-btn");
+const ModalCloseBtn = document.getElementById("modal-close");
+const cardCloseBtns = document.getElementsByClassName(".card-close");
+const modalTitle = document.getElementById("title");
 
 function Book(title, author, genre, pages, status) {
     this.title = title;
@@ -17,19 +27,26 @@ function Book(title, author, genre, pages, status) {
     this.status = status;
 }
 
+let id = -1;
+
 function addBook() {
     const formData = new FormData(document.querySelector("form"));
     const formProps = Object.fromEntries(formData);
-
+    
+    id += 1;
+    formProps.id = id;
     myLibrary.push(formProps);
 }
 
+let index = -1;
+
 function displayNewBook() {
-    const cardContainer = document.querySelector('#card-container');
+    index += 1;
     const lastEntry = myLibrary.slice(-1)[0];
     const newCard = document.createElement('div');
     
     newCard.classList.add("card");
+    newCard.setAttribute("data-id", index);
 
     // Create a <p> tag for each value
     Object.values(lastEntry).forEach((value) => {
@@ -38,27 +55,60 @@ function displayNewBook() {
         newCard.appendChild(p); 
     });
 
+    // Create tag for close button  
+    let closeBtn = document.createElement('button');
+    closeBtn.innerHTML = 'remove';
+    closeBtn.classList.add("card-close");
+    closeBtn.setAttribute('data-id', index);
+    newCard.appendChild(closeBtn);
+
     cardContainer.appendChild(newCard);
 }
 
-function createCards(library) {
-    const cardContainer = document.querySelector('#card-container');
-    cardContainer.innerHTML = '';
+function createCards(library) { // delete after testing
+    cardContainer.innerHTML = ''
 
     for (item of library) {
+        index += 1;
         const newCard = document.createElement('div');
         newCard.classList.add("card");
+        newCard.setAttribute('data-id', index);
 
         // Create a <p> tag for each value
         Object.values(item).forEach((value) => {
             let p = document.createElement('p');
             p.innerText = value;
-            newCard.appendChild(p); 
+            newCard.appendChild(p);
+
+            return newCard;
         });
+
+        // Create tag for close button  
+        let closeBtn = document.createElement('button');
+        closeBtn.innerHTML = 'remove';
+        closeBtn.classList.add("card-close");
+        closeBtn.setAttribute('data-id', index);
+
+        newCard.appendChild(closeBtn);
 
         cardContainer.appendChild(newCard);
     }
 }
+
+function deleteCard(id) {
+    // Deletes the card and library index with same ID
+    let card = document.querySelector(`[data-id= '${id}']`);
+
+    myLibrary.splice(id, 1);
+    card.style.display = "none";
+
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('card-close')) {
+        deleteCard(e.target.getAttribute('data-id'));
+    }
+});
 
 function sortByProp(prop) {
     let order = 1;
@@ -74,12 +124,9 @@ function sortByProp(prop) {
     }
 }
 
-const modal = document.getElementById("modal");
-const addBookBtn = document.getElementById("add-book-btn");
-const ModalCloseBtn = document.getElementById("modal-close");
-
 addBookBtn.onclick = () => {
-    modal.style.display = "flex";
+    modal.style.display = "grid";
+    modalTitle.focus();
 }
 
 ModalCloseBtn.onclick = () => {
@@ -89,19 +136,19 @@ ModalCloseBtn.onclick = () => {
 modal.onsubmit = () => {
     addBook();
     displayNewBook();
+    modal.style.display = "none"
     return false;
 }
 
-
 // Chage card layout on sort-by selection
-window.addEventListener('change', () => {
-    const sortBy = document.getElementById("sort-by").value;
-
-    createCards(myLibrary.slice(0).sort(sortByProp(sortBy)));
+sortBy.addEventListener('change', () => {
+    createCards(myLibrary.slice(0).sort(sortByProp(sortBy.value)));
 });
 
 window.onload(createCards(myLibrary)); // Remove after styling/testing
 
+
 // TODO:
 // Add check array for duplicates function
 // Capitalize, trim white space on entries
+// Figure out how to sort cards without destroying/recreating them
