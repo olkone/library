@@ -8,8 +8,6 @@ function Book(title, author, genre, pages, status) {
     this.status = status;
 }
 
-const cardContainer = document.querySelector('#card-container');
-const cards = document.querySelectorAll(".card");
 const sortBy = document.getElementById("sort-by");
 const modal = document.getElementById("modal");
 
@@ -32,27 +30,38 @@ function addBook() {
 
 function displayNewBook() {
     index += 1;
+    const cardContainer = document.querySelector('#card-container');
     const lastEntry = myLibrary.slice(-1)[0];
     const newCard = document.createElement('div');
+    const closeBtn = createCardButton('close', index);
+    const editBtn = createCardButton('edit', index);
     
     newCard.classList.add("card");
     newCard.setAttribute("data-id", index);
 
-    // Create a <p> tag for each value
+    createCardContent(lastEntry, newCard);
+    
+    newCard.appendChild(closeBtn);
+    newCard.appendChild(editBtn);
+    cardContainer.appendChild(newCard);
+}
+
+function createCardContent(lastEntry, newCard) {
     Object.values(lastEntry).forEach((value) => {
         let p = document.createElement('p');
         p.innerText = value;
         newCard.appendChild(p); 
     });
+}
 
-    // Create tag for close button  
-    let closeBtn = document.createElement('button');
-    closeBtn.innerHTML = 'remove';
-    closeBtn.classList.add("card-close");
-    closeBtn.setAttribute('data-id', index);
-    newCard.appendChild(closeBtn);
+function createCardButton(name, index) {
+    const newButton = document.createElement('button');
 
-    cardContainer.appendChild(newCard);
+    newButton.innerHTML = `${name}`;
+    newButton.classList.add(`card-${name}`);
+    newButton.setAttribute('data-id', index);
+
+    return newButton;
 }
 
 // Delete card and book from myLibrary
@@ -82,6 +91,18 @@ function sortByProp(prop) {
     }
 }
 
+function clearForm() {
+    const children = modal.childNodes;
+    children.forEach((child) => {
+        child.value = '';
+    });
+
+    const radioBtns = document.getElementById("radio-btns").childNodes;
+    radioBtns.forEach(button => {
+        button.checked = false;
+    });
+}
+
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('card-close')) {
         deleteCard(e.target.getAttribute('data-id'));
@@ -102,6 +123,7 @@ ModalCloseBtn.onclick = () => {
 modal.onsubmit = () => {
     addBook();
     displayNewBook();
+    clearForm();
     modal.style.display = "none";
     return false;
 }
