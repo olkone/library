@@ -39,23 +39,32 @@
      
         <label for="genre">Genre</label>
         <select name="genre">
-            <option value="adventure">Adventure</option>
-            <option value="childrens">Children's</option>
-            <option value="comedy">Comedy</option>
-            <option value="drama">Drama</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="fiction">Fiction</option>
-            <option value="non-fiction">Non-Fiction</option>
-            <option value="romance">Romance</option>
-            <option value="sci-fi">Sci-Fi</option>
-            <option value="young-adult">Young Adult</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Children's">Children's</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Non-fiction">Non-Fiction</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-fi">Sci-Fi</option>
+            <option value="Young Adult">Young Adult</option>
+            <option value="Other">Other</option>
         </select>
 
         <label for="pages">Pages</label>
         <input type="number" name="pages" class="input number" min="1" max="9999" required>
-        
-        <label for="status">Finished?</label>
-        <input type="checkbox" name="status" class="input check">
+
+        <div id="radio-btns">
+            <label for="yes">Read</label>
+            <input type="radio" name="status" class="input radio" id="yes" value="Read">
+
+            <label for="in-progress">In Progress</label>
+            <input type="radio" name="status" class="input radio" id="in-progress" value="In Progress">
+
+            <label for="no">Not Read</label>
+            <input type="radio" name="status" class="input radio" id="no" value="Not Read">
+        </div>
 
         <button id="submit-btn" type="submit">Add Book</button>
         
