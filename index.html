@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
     <script src="./library.js" defer></script>
 </head>
 <body>
     <header>
         <h1>Library</h1>
+    
         <fieldset>
             <label for="sort-by">Sort by:</label>
             <select name="sort-by" id="sort-by">
@@ -21,45 +25,42 @@
                 <option value="pages">number of pages</option>
             </select>
         </fieldset>
-
+    
         <button id="add-book-btn">Add Book</button>
     </header>
     <form id="modal" name="newBookForm">
+        <p>Add a new book</p>
         <span class="close" id="modal-close">&times;</span>
-        <fieldset class="formgroup">
-            <legend>Book Information:</legend>
 
-            <label for="title">Title</label>
-            <input id="title" type="text" name="title" class="input text" required>
+        <label for="title">Title</label>
+        <input id="title" type="text" name="title" class="input text" maxlength="50" required autofocus>
         
-            <label for="author">Author</label>
-            <input type="text" name="author" class="input text" required>
+        <label for="author">Author</label>
+        <input type="text" name="author" class="input text" maxlength="40" required>
      
-            <label for="genre">Genre</label>
-            <select name="genre">
-                <option value="adventure">Adventure</option>
-                <option value="childrens">Children's</option>
-                <option value="comedy">Comedy</option>
-                <option value="drama">Drama</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="fiction">Fiction</option>
-                <option value="non-fiction">Non-Fiction</option>
-                <option value="romance">Romance</option>
-                <option value="sci-fi">Sci-Fi</option>
-                <option value="young-adult">Young Adult</option>
-            </select>
+        <label for="genre">Genre</label>
+        <select name="genre">
+            <option value="adventure">Adventure</option>
+            <option value="childrens">Children's</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="fiction">Fiction</option>
+            <option value="non-fiction">Non-Fiction</option>
+            <option value="romance">Romance</option>
+            <option value="sci-fi">Sci-Fi</option>
+            <option value="young-adult">Young Adult</option>
+        </select>
 
-            <label for="pages">Pages</label>
-            <input type="number" name="pages" class="input number">
-        </fieldset>
-        <fieldset class="formgroup">
-            <legend>Have you read this book?</legend>
-            <input type="checkbox" name="status" class="input check">
-        </fieldset>
+        <label for="pages">Pages</label>
+        <input type="number" name="pages" class="input number" min="1" max="9999" required>
+        
+        <label for="status">Finished?</label>
+        <input type="checkbox" name="status" class="input check">
+
         <button id="submit-btn" type="submit">Add Book</button>
+        
     </form>
-
-
     <div id="card-container"></div>
 </body>
 </html>
