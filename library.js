@@ -15,6 +15,10 @@ const editTitle = document.querySelector("#edit-title");
 const editAuthor = document.querySelector("#edit-author");
 const editGenre = document.querySelector("#edit-genre");
 const editPages = document.querySelector("#edit-pages");
+const editRead = document.querySelector("#edit-read");
+const editProgress = document.querySelector("#edit-in-progress");
+const editNotRead = document.querySelector("#edit-not-read");
+
 
 function Book(title, author, genre, pages, status) {
     this.title = title;
@@ -97,31 +101,30 @@ function deleteCard(id) {
 }
 
 function populateEditModal(id) {
-    const book = myLibrary[id];
     const title = document.querySelector(`.id${id}` + '.p1');
     const author = document.querySelector(`.id${id}` + '.p2');
     const genre = document.querySelector(`.id${id}` + '.p3');
     const pages = document.querySelector(`.id${id}` + '.p4');
+    const status = document.querySelector(`.id${id}` + '.p5')
 
     editTitle.value = title.innerText;
     editAuthor.value = author.innerText;
     editGenre.value = genre.innerText;
     editPages.value = pages.innerText;
-}
-
-function editCard(id) {
-    const book = myLibrary[id];
-    const title = document.querySelector(`.id${id}` + '.p1');
-    const author = document.querySelector(`.id${id}` + '.p2');
-    const genre = document.querySelector(`.id${id}` + '.p3');
-    const pages = document.querySelector(`.id${id}` + '.p4');
     
-    title.innerText = book.title;
-    author.innerText = book.author;
-    genre.innerText = book.genre;
-    pages.innerText = book.pages;
+    switch(status.innerText) {
+        case 'Read':
+            editRead.checked = true;
+            break;
 
-    editModal.style.display = "none";
+        case 'In Progress':
+            editProgress.checked = true;
+            break;
+
+        case 'Not Read':
+            editNotRead.checked = true;
+            break;
+    }
 }
 
 function editLibrary(id) {
@@ -131,6 +134,35 @@ function editLibrary(id) {
     book.author = editAuthor.value;
     book.genre = editGenre.value;
     book.pages = editPages.value;
+
+    switch(true) {
+        case editRead.checked === true:
+            book.status = 'Read';
+            break;
+        case editProgress.checked === true:
+            book.status = 'In Progress';
+            break;
+        case editNotRead.checked === true:
+            book.status = 'Not Read';
+            break;
+    }
+}
+
+function editCard(id) {
+    const book = myLibrary[id];
+    const title = document.querySelector(`.id${id}` + '.p1');
+    const author = document.querySelector(`.id${id}` + '.p2');
+    const genre = document.querySelector(`.id${id}` + '.p3');
+    const pages = document.querySelector(`.id${id}` + '.p4');
+    const status = document.querySelector(`.id${id}` + '.p5')
+    
+    title.innerText = book.title;
+    author.innerText = book.author;
+    genre.innerText = book.genre;
+    pages.innerText = book.pages;
+    status.innerText = book.status;
+    
+    editModal.style.display = "none";
 }
 
 function clearForm(form) {
@@ -201,14 +233,7 @@ modal.onsubmit = () => {
     return false;
 }
 
-// Chage card layout on sort-by selection
-sortBy.addEventListener('change', () => {
-    //sortCards(myLibrary.slice(0).sort(sortByProp(sortBy.value)));
-    return;
-});
-
 // TODO:
 // Edit radio button values
 // Add check array for duplicates function
 // Trim white space on entries
-// Figure out how to sort cards without destroying/recreating them
