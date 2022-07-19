@@ -13,6 +13,7 @@ body {
   display: flex;
   flex: auto;
   flex-flow: column nowrap;
+  justify-content: space-between;
   position: relative;
 }
 
@@ -270,6 +271,36 @@ form button:active {
 }
 #card-container .card div .card-delete:active {
   background-color: #d72344;
+}
+
+footer {
+  align-items: flex-end;
+  display: inline-flex;
+  flex: 1;
+  font-size: 0.8rem;
+  gap: 5px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+  max-height: 20px;
+}
+footer p,
+footer a {
+  align-self: center;
+  color: #8f8f8f;
+  margin: 0;
+}
+footer img {
+  height: 24px;
+  width: auto;
+}
+footer a:hover {
+  color: #37b4a9;
+  transition-duration: 250ms;
+}
+footer img:hover {
+  transform: scale(1.15);
+  transition-duration: 250ms;
 }
 
 /* 

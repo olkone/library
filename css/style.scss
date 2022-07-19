@@ -37,7 +37,6 @@ $modal-button-background: white;
 $modal-button-text: #231f20;
 $modal-button-border: none;
 $input-border: none;
-$input-focus: 1px solid rgb(192, 117, 94);
 
 html,
 body {
@@ -55,6 +54,7 @@ body {
     display: flex;
     flex: auto;
     flex-flow: column nowrap;
+    justify-content: space-between;
 
     position: relative;
 }
@@ -364,6 +364,45 @@ form {
             }
 
         }
+    }
+}
+
+$footer-text: #8f8f8f;
+$footer-hover: #37b4a9;
+
+footer {
+    align-items: flex-end;
+    display: inline-flex;
+    flex: 1;
+
+    font-size: 0.8rem;
+    gap: 5px;
+    
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    max-height: 20px;
+
+    p,
+    a {
+        align-self: center;
+        color: $footer-text;
+        margin: 0;
+    }
+
+    img {
+        height: 24px;
+        width: auto;
+    }
+
+    a:hover {
+        color: $footer-hover;
+        transition-duration: 250ms;
+    }
+
+    img:hover {
+        transform: scale(1.15);
+        transition-duration: 250ms;
     }
 }
 

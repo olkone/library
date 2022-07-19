@@ -9,22 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <link rel="icon" href="./images/favicon.svg">
     <script src="./library.js" defer></script>
 </head>
 <body>
     <header>
         <h1>Library</h1>
-    
-        <fieldset>
-            <label for="sort-by">Sort by:</label>
-            <select name="sort-by" id="sort-by">
-                <option value="original">order added</option>
-                <option value="title">title</option>
-                <option value="author">author</option>
-                <option value="genre">genre</option>
-                <option value="pages">number of pages</option>
-            </select>
-        </fieldset>
         <button id="add-book-btn">+</button>
     </header>
 
@@ -33,10 +23,10 @@
         <span class="close" id="modal-close">&times;</span>
 
         <label for="title">Title</label>
-        <input id="title" type="text" name="title" class="input text" maxlength="50" required autofocus>
+        <input id="title" type="text" name="title" class="input text" maxlength="100" required autofocus>
         
         <label for="author">Author</label>
-        <input id="author" type="text" name="author" class="input text" maxlength="40" required>
+        <input id="author" type="text" name="author" class="input text" maxlength="100" required>
      
         <label for="genre">Genre</label>
         <select name="genre" id="genre" required>
@@ -112,9 +102,14 @@
         </div>
 
         <button id="edit-submit-btn" type="submit">Edit Book</button>
-        
     </form>
 
     <div id="card-container"></div>
+
+    <footer>
+        <p> Made by <a href="https://github.com/olkone">Oliver Konecny</a>, 2022
+        </p>
+        <a href="https://github.com/olkone/library/"><img src="./images/GitHub-Mark-64px.png" alt="GitHub logo"></a>
+    </footer>
 </body>
 </html>
