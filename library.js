@@ -1,13 +1,3 @@
-let myLibrary = [];
-
-function Book(title, author, genre, pages, status) {
-    this.title = title;
-    this.author = author;
-    this.genre = genre;
-    this.pages = pages;
-    this.status = status;
-}
-
 const sortBy = document.getElementById("sort-by");
 const addBookBtn = document.getElementById("add-book-btn");
 
@@ -21,6 +11,20 @@ const editCloseBtn = document.getElementById("edit-modal-close");
 const cardDeleteBtns = document.getElementsByClassName(".card-delete");
 const cardEditBtns = document.getElementsByClassName(".card-edit");
 
+const editTitle = document.querySelector("#edit-title");
+const editAuthor = document.querySelector("#edit-author");
+const editGenre = document.querySelector("#edit-genre");
+const editPages = document.querySelector("#edit-pages");
+
+function Book(title, author, genre, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+    this.pages = pages;
+    this.status = status;
+}
+
+let myLibrary = [];
 
 let id = -1;
 let index = -1;
@@ -92,6 +96,19 @@ function deleteCard(id) {
     card.style.display = "none";
 }
 
+function populateEditModal(id) {
+    const book = myLibrary[id];
+    const title = document.querySelector(`.id${id}` + '.p1');
+    const author = document.querySelector(`.id${id}` + '.p2');
+    const genre = document.querySelector(`.id${id}` + '.p3');
+    const pages = document.querySelector(`.id${id}` + '.p4');
+
+    editTitle.value = title.innerText;
+    editAuthor.value = author.innerText;
+    editGenre.value = genre.innerText;
+    editPages.value = pages.innerText;
+}
+
 function editCard(id) {
     const book = myLibrary[id];
     const title = document.querySelector(`.id${id}` + '.p1');
@@ -108,21 +125,15 @@ function editCard(id) {
 }
 
 function editLibrary(id) {
-
     const book = myLibrary[id];
-    const title = document.querySelector("#edit-title");
-    const author = document.querySelector("#edit-author");
-    const genre = document.querySelector("#edit-genre");
-    const pages = document.querySelector("#edit-pages");
 
-    book.title = title.value;
-    book.author = author.value;
-    book.genre = genre.value;
-    book.pages = pages.value;
+    book.title = editTitle.value;
+    book.author = editAuthor.value;
+    book.genre = editGenre.value;
+    book.pages = editPages.value;
 }
 
 function clearForm(form) {
-
     const thisForm = document.getElementById(`${form}`);
     const children = thisForm.childNodes;
     children.forEach((child) => {
@@ -158,6 +169,8 @@ document.addEventListener('click', (e) => {
         let cardId = e.target.getAttribute('data-id');
         editModal.style.display = "grid";
 
+        populateEditModal(cardId);
+
         editModal.onsubmit = () => {
             editLibrary(cardId);
             editCard(cardId);
@@ -176,7 +189,6 @@ modalCloseBtn.onclick = () => {
     modal.style.display = "none";
 }
 
-
 editCloseBtn.onclick = () => {
     editModal.style.display = "none";
 }
@@ -191,11 +203,12 @@ modal.onsubmit = () => {
 
 // Chage card layout on sort-by selection
 sortBy.addEventListener('change', () => {
-    //createCards(myLibrary.slice(0).sort(sortByProp(sortBy.value)));
+    //sortCards(myLibrary.slice(0).sort(sortByProp(sortBy.value)));
     return;
 });
 
 // TODO:
+// Edit radio button values
 // Add check array for duplicates function
 // Trim white space on entries
 // Figure out how to sort cards without destroying/recreating them
