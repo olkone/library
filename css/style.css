@@ -75,7 +75,11 @@ header button:active {
     opacity: 1;
   }
 }
-#modal {
+#edit-modal {
+  background-color: #41ad38;
+}
+
+form {
   display: none;
   grid-template-columns: max-content 1fr;
   grid-template-rows: max-content;
@@ -96,60 +100,60 @@ header button:active {
   font-size: 1rem;
   text-align: end;
 }
-#modal span {
+form span {
   grid-area: 1/1;
   font-size: 1.6rem;
   text-align: center;
   margin: 10px 0 0 0;
 }
-#modal span:hover {
+form span:hover {
   transform: scale(1.1);
 }
-#modal span:active {
+form span:active {
   transform: scale(0.9);
 }
-#modal p {
+form p {
   grid-area: 2/span 2;
   font-size: 1.3rem;
   text-align: center;
   margin: -40px 0 0 0;
 }
-#modal label {
+form label {
   margin: 1.2rem 10px 1.2rem 20px;
 }
-#modal input,
-#modal select {
+form input,
+form select {
   margin-right: 10%;
   height: 1.8rem;
   font-size: 1rem;
   border: none;
 }
-#modal label:nth-of-type(1) {
+form label:nth-of-type(1) {
   grid-area: 3/1;
 }
-#modal input:nth-of-type(1) {
+form input:nth-of-type(1) {
   grid-area: 3/2;
 }
-#modal label:nth-of-type(2) {
+form label:nth-of-type(2) {
   grid-area: 4/1;
 }
-#modal input:nth-of-type(2) {
+form input:nth-of-type(2) {
   grid-area: 4/2;
 }
-#modal label:nth-of-type(3) {
+form label:nth-of-type(3) {
   grid-area: 5/1;
 }
-#modal select {
+form select {
   grid-area: 5/2;
 }
-#modal label:nth-of-type(4) {
+form label:nth-of-type(4) {
   grid-area: 6/1;
 }
-#modal input:nth-of-type(3) {
+form input:nth-of-type(3) {
   grid-area: 6/2;
   margin-right: 60%;
 }
-#modal #radio-btns {
+form .radio-btns {
   grid-area: 7/span 2;
   display: flex;
   flex: auto;
@@ -157,10 +161,10 @@ header button:active {
   align-items: center;
   justify-content: center;
 }
-#modal #radio-btns input {
+form .radio-btns input {
   margin: auto 20px auto -3px;
 }
-#modal button {
+form button {
   grid-area: 8/span 2;
   background-color: white;
   border: none;
@@ -171,10 +175,10 @@ header button:active {
   height: 50px;
   width: 50%;
 }
-#modal button:hover {
+form button:hover {
   background-color: #ededed;
 }
-#modal button:active {
+form button:active {
   background-color: #cccccc;
 }
 

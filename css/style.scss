@@ -125,7 +125,11 @@ header {
     }
 }
 
-#modal {
+#edit-modal {
+    background-color: #41ad38;
+    
+}
+form {
     display: none;
     grid-template-columns: max-content 1fr;
     grid-template-rows: max-content;
@@ -214,7 +218,7 @@ header {
         margin-right: 60%;
     }
 
-    #radio-btns {
+    .radio-btns {
         grid-area: 7 / span 2;
 
         display: flex;
