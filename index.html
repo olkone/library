@@ -39,7 +39,8 @@
         <input id="author" type="text" name="author" class="input text" maxlength="40" required>
      
         <label for="genre">Genre</label>
-        <select name="genre" id="genre">
+        <select name="genre" id="genre" required>
+            <option disabled selected value></option>
             <option value="Adventure">Adventure</option>
             <option value="Children's">Children's</option>
             <option value="Comedy">Comedy</option>
@@ -54,11 +55,11 @@
         </select>
 
         <label for="pages">Pages</label>
-        <input id="pages" type="number" name="pages" class="input number" min="1" max="9999" required>
+        <input id="pages" type="number" name="pages" class="input number" min="1" max="99999" required>
 
         <div class="radio-btns">
             <label for="yes">Read</label>
-            <input type="radio" name="status" class="input radio" id="yes" value="Read">
+            <input type="radio" name="status" class="input radio" id="yes" value="Read" required>
 
             <label for="in-progress">In Progress</label>
             <input type="radio" name="status" class="input radio" id="in-progress" value="In Progress">
@@ -82,7 +83,7 @@
         <input id="edit-author" type="text" name="edit-author" class="input text" maxlength="40" required>
      
         <label for="edit-genre">Genre</label>
-        <select name="edit-genre" id="edit-genre">
+        <select name="edit-genre" id="edit-genre" required>
             <option value="Adventure">Adventure</option>
             <option value="Children's">Children's</option>
             <option value="Comedy">Comedy</option>
@@ -97,17 +98,17 @@
         </select>
 
         <label for="edit-pages">Pages</label>
-        <input id="edit-pages" type="number" name="edit-pages" class="input number" min="1" max="9999" required>
+        <input id="edit-pages" type="number" name="edit-pages" class="input number" min="1" max="99999" required>
 
-        <div class="radio-btns">
+        <div class="edit-radio-btns">
             <label for="edit-read">Read</label>
-            <input type="radio" name="status" class="input radio" id="edit-read" value="Read">
+            <input type="radio" name="edit-status" class="input radio" id="edit-read" value="Read" required>
 
             <label for="edit-in-progress">In Progress</label>
-            <input type="radio" name="status" class="input radio" id="edit-in-progress" value="In Progress">
+            <input type="radio" name="edit-status" class="input radio" id="edit-in-progress" value="In Progress">
 
             <label for="edit-not-read">Not Read</label>
-            <input type="radio" name="status" class="input radio" id="edit-not-read" value="Not Read">
+            <input type="radio" name="edit-status" class="input radio" id="edit-not-read" value="Not Read">
         </div>
 
         <button id="edit-submit-btn" type="submit">Edit Book</button>
