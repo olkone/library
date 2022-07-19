@@ -80,13 +80,6 @@ header {
         width: max-content;
     }
 
-    fieldset {
-        display: none;
-        border: none;
-        margin: auto;
-        width: max-content;
-    }
-
     button {
         border: none;
         border-radius: 100%;
@@ -218,6 +211,7 @@ form {
         margin-right: 60%;
     }
 
+    .edit-radio-btns,
     .radio-btns {
         grid-area: 7 / span 2;
 
@@ -271,60 +265,75 @@ form {
         box-shadow: $card-shadow;
         color: $card-text;
 
-        display: grid;
-        grid-template-rows: max-content;
-        grid-auto-rows: 1fr;
-
-        height: min(320px, 400px);
-        min-width: 240px;
-        max-width: 240px;
+        display: flex;
+        flex: 0 0 23%;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        
+        min-height: 300px;
+        max-height: 300px;
+        min-width: 200px;
         margin: 10px;
         position: relative;
 
+
         p {
             padding: 0 10px;
+            height: max-content;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        p:first-of-type {
+        .p1 {
             background-color: $card-header-color;
             border-radius: 20px 20px 0 0;
             color: $card-title-text;
             font-size: 1.2rem;
             margin: 0;
-            padding: 10px 0;
+            padding: 10px;
             text-align: center;
+        }
+
+        .p2::before {
+            content: "by: ";
+        }
+
+        .p3::before {
+            content: "genre: ";
+        }
+
+        .p4::before {
+            content: "pages: ";
+        }
+
+        .p5::before {
+            content: "status: "
         }
 
         p:last-of-type {
             display: none;
         }
 
-        p:nth-child(2)::before {
-            content: "by ";
-        }
-
-        p:nth-child(3)::before {
-            content: "genre: ";
-        }
-
-        p:nth-child(4)::before {
-            content: "pages: ";
-        }
-
-        p:nth-child(5)::before {
-            content: "status: "
-        }
-
         *::before {
             color: $card-light-text;
         }
 
+        .p5 {
+            padding-bottom: 50px;
+        }
+
         div {
+            position: absolute;
+
+            bottom: 8px;
+            right: 10px;
 
             display: inline-flex;
             gap: 10px;
             justify-content: flex-end;
-            margin-right: 10px;
+            height: max-content;
 
             button {
                 height: 30px;
@@ -357,3 +366,8 @@ form {
         }
     }
 }
+
+/* 
+TO DO:
+Optimize for mobile
+*/

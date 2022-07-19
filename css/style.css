@@ -35,12 +35,6 @@ header h1 {
   margin: auto 40px;
   width: max-content;
 }
-header fieldset {
-  display: none;
-  border: none;
-  margin: auto;
-  width: max-content;
-}
 header button {
   border: none;
   border-radius: 100%;
@@ -153,6 +147,7 @@ form input:nth-of-type(3) {
   grid-area: 6/2;
   margin-right: 60%;
 }
+form .edit-radio-btns,
 form .radio-btns {
   grid-area: 7/span 2;
   display: flex;
@@ -161,6 +156,7 @@ form .radio-btns {
   align-items: center;
   justify-content: center;
 }
+form .edit-radio-btns input,
 form .radio-btns input {
   margin: auto 20px auto -3px;
 }
@@ -195,50 +191,62 @@ form button:active {
   border: none;
   box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.168);
   color: #353535;
-  display: grid;
-  grid-template-rows: max-content;
-  grid-auto-rows: 1fr;
-  height: 320px;
-  min-width: 240px;
-  max-width: 240px;
+  display: flex;
+  flex: 0 0 23%;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  min-height: 300px;
+  max-height: 300px;
+  min-width: 200px;
   margin: 10px;
   position: relative;
 }
 #card-container .card p {
   padding: 0 10px;
+  height: max-content;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-#card-container .card p:first-of-type {
+#card-container .card .p1 {
   background-color: #454ade;
   border-radius: 20px 20px 0 0;
   color: white;
   font-size: 1.2rem;
   margin: 0;
-  padding: 10px 0;
+  padding: 10px;
   text-align: center;
+}
+#card-container .card .p2::before {
+  content: "by: ";
+}
+#card-container .card .p3::before {
+  content: "genre: ";
+}
+#card-container .card .p4::before {
+  content: "pages: ";
+}
+#card-container .card .p5::before {
+  content: "status: ";
 }
 #card-container .card p:last-of-type {
   display: none;
 }
-#card-container .card p:nth-child(2)::before {
-  content: "by ";
-}
-#card-container .card p:nth-child(3)::before {
-  content: "genre: ";
-}
-#card-container .card p:nth-child(4)::before {
-  content: "pages: ";
-}
-#card-container .card p:nth-child(5)::before {
-  content: "status: ";
-}
 #card-container .card *::before {
   color: #818181;
 }
+#card-container .card .p5 {
+  padding-bottom: 50px;
+}
 #card-container .card div {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
   display: inline-flex;
   gap: 10px;
   justify-content: flex-end;
-  margin-right: 10px;
+  height: max-content;
 }
 #card-container .card div button {
   height: 30px;
@@ -263,5 +271,10 @@ form button:active {
 #card-container .card div .card-delete:active {
   background-color: #d72344;
 }
+
+/* 
+TO DO:
+Optimize for mobile
+*/
 
 /*# sourceMappingURL=style.css.map */
