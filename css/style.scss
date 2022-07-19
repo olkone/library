@@ -5,7 +5,7 @@ $main-background: rgb(240, 240, 240);
 
 $header-background: white;
 $header-text: #353535;
-$header-button-background: #41ad38;
+$header-button-background: #38a8c7;
 $header-button-text: white;
 $header-shadow: 0 5px 10px rgba(0, 0, 0, 0.188);
 
@@ -28,10 +28,10 @@ $delete-button-hover: #e24b67;
 $delete-button-hover-text: white;
 
 
-$modal-background: #f5d41b;
-$modal-text: #353535;
+$modal-background: #38a8c7;
+$modal-text: white;
 $modal-border: none;
-$modal-shadow: 4px 4px 4px rgba(0, 0, 0, 0.514);
+$modal-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 
 $modal-button-background: white;
 $modal-button-text: #231f20;
@@ -126,7 +126,7 @@ header {
 }
 
 #edit-modal {
-    background-color: #41ad38;
+    background-color: #37b4a9;
     
 }
 form {
