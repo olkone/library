@@ -54,9 +54,12 @@ function displayNewBook() {
 }
 
 function createCardContent(lastEntry, newCard) {
+    let nth = 0;
     Object.values(lastEntry).forEach((value) => {
+        nth += 1;
         let p = document.createElement('p');
         p.innerText = value;
+        p.setAttribute('class', `id${lastEntry.id} p${nth}`);
         newCard.appendChild(p); 
     });
 }
@@ -89,6 +92,49 @@ function deleteCard(id) {
     card.style.display = "none";
 }
 
+function editCard(id) {
+    const book = myLibrary[id];
+    const title = document.querySelector(`.id${id}` + '.p1');
+    const author = document.querySelector(`.id${id}` + '.p2');
+    const genre = document.querySelector(`.id${id}` + '.p3');
+    const pages = document.querySelector(`.id${id}` + '.p4');
+    
+    title.innerText = book.title;
+    author.innerText = book.author;
+    genre.innerText = book.genre;
+    pages.innerText = book.pages;
+
+    editModal.style.display = "none";
+}
+
+function editLibrary(id) {
+
+    const book = myLibrary[id];
+    const title = document.querySelector("#edit-title");
+    const author = document.querySelector("#edit-author");
+    const genre = document.querySelector("#edit-genre");
+    const pages = document.querySelector("#edit-pages");
+
+    book.title = title.value;
+    book.author = author.value;
+    book.genre = genre.value;
+    book.pages = pages.value;
+}
+
+function clearForm(form) {
+
+    const thisForm = document.getElementById(`${form}`);
+    const children = thisForm.childNodes;
+    children.forEach((child) => {
+        child.value = '';
+    });
+
+    const radioBtns = document.querySelector(".radio-btns").childNodes;
+    radioBtns.forEach(button => {
+        button.checked = false;
+    });
+}
+
 function sortByProp(prop) {
     let order = 1;
 
@@ -103,31 +149,23 @@ function sortByProp(prop) {
     }
 }
 
-function clearForm() {
-    const children = modal.childNodes;
-    children.forEach((child) => {
-        child.value = '';
-    });
-
-    const radioBtns = document.querySelector(".radio-btns").childNodes;
-    radioBtns.forEach(button => {
-        button.checked = false;
-    });
-}
-
-
-
 document.addEventListener('click', (e) => {
     let id = e.target.getAttribute('data-id');
 
     if (e.target.classList.contains('card-delete')) {
         deleteCard(id);
     } else if (e.target.classList.contains('card-edit')) {
-        editCard(id);
+        let cardId = e.target.getAttribute('data-id');
+        editModal.style.display = "grid";
+
+        editModal.onsubmit = () => {
+            editLibrary(cardId);
+            editCard(cardId);
+            clearForm('edit-modal');
+            return false;
+        };
     }
-
 });
-
 
 addBookBtn.onclick = () => {
     modal.style.display = "grid";
@@ -138,6 +176,7 @@ modalCloseBtn.onclick = () => {
     modal.style.display = "none";
 }
 
+
 editCloseBtn.onclick = () => {
     editModal.style.display = "none";
 }
@@ -145,29 +184,10 @@ editCloseBtn.onclick = () => {
 modal.onsubmit = () => {
     addBook();
     displayNewBook();
-    clearForm();
+    clearForm('modal');
     modal.style.display = "none";
     return false;
 }
-
-
-function editCard(id) {
-    const book = myLibrary[id];
-    const title = document.querySelector("#edit-title");
-    const author = document.querySelector("#edit-author");
-    const genre = document.querySelector("#edit-genre");
-    const pages = document.querySelector("#edit-pages");
-
-    editModal.style.display = "grid";
-    title.focus();
-
-    title.value = book.title;
-    author.value = book.author;
-    genre.value = book.genre;
-    pages.value = book.pages;
-
-}
-
 
 // Chage card layout on sort-by selection
 sortBy.addEventListener('change', () => {
@@ -175,9 +195,7 @@ sortBy.addEventListener('change', () => {
     return;
 });
 
-
 // TODO:
-// Add edit function
 // Add check array for duplicates function
-// Capitalize, trim white space on entries
+// Trim white space on entries
 // Figure out how to sort cards without destroying/recreating them
