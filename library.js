@@ -9,19 +9,25 @@ function Book(title, author, genre, pages, status) {
 }
 
 const sortBy = document.getElementById("sort-by");
-const modal = document.getElementById("modal");
-
 const addBookBtn = document.getElementById("add-book-btn");
-const ModalCloseBtn = document.getElementById("modal-close");
-const cardDeleteBtns = document.getElementsByClassName(".card-delete");
+
+const modal = document.getElementById("modal");
+const modalCloseBtn = document.getElementById("modal-close");
 const modalTitle = document.getElementById("title");
+
+const editModal = document.getElementById("edit-modal");
+const editCloseBtn = document.getElementById("edit-modal-close");
+
+const cardDeleteBtns = document.getElementsByClassName(".card-delete");
+const cardEditBtns = document.getElementsByClassName(".card-edit");
+
 
 let id = -1;
 let index = -1;
 
 function addBook() {
     id += 1;
-    const formData = new FormData(document.querySelector("form")); // Information from modal form
+    const formData = new FormData(modal);
     const formProps = Object.fromEntries(formData);
     
     formProps.id = id;
@@ -71,7 +77,6 @@ function createButtonContainer(newDiv, btn1, btn2, container) {
     container.appendChild(newDiv);
 }
 
-// Delete card and book from myLibrary
 function deleteCard(id) {
     const card = document.querySelector(`.card[data-id="${id}"]`);
     const cardId = card.getAttribute('data-id');
@@ -104,27 +109,37 @@ function clearForm() {
         child.value = '';
     });
 
-    const radioBtns = document.getElementById("radio-btns").childNodes;
+    const radioBtns = document.querySelector(".radio-btns").childNodes;
     radioBtns.forEach(button => {
         button.checked = false;
     });
 }
 
+
+
 document.addEventListener('click', (e) => {
+    let id = e.target.getAttribute('data-id');
+
     if (e.target.classList.contains('card-delete')) {
-        deleteCard(e.target.getAttribute('data-id'));
+        deleteCard(id);
+    } else if (e.target.classList.contains('card-edit')) {
+        editCard(id);
     }
+
 });
 
-// Add book / modal buttons
 
 addBookBtn.onclick = () => {
     modal.style.display = "grid";
     modalTitle.focus();
 }
 
-ModalCloseBtn.onclick = () => {
+modalCloseBtn.onclick = () => {
     modal.style.display = "none";
+}
+
+editCloseBtn.onclick = () => {
+    editModal.style.display = "none";
 }
 
 modal.onsubmit = () => {
@@ -134,6 +149,25 @@ modal.onsubmit = () => {
     modal.style.display = "none";
     return false;
 }
+
+
+function editCard(id) {
+    const book = myLibrary[id];
+    const title = document.querySelector("#edit-title");
+    const author = document.querySelector("#edit-author");
+    const genre = document.querySelector("#edit-genre");
+    const pages = document.querySelector("#edit-pages");
+
+    editModal.style.display = "grid";
+    title.focus();
+
+    title.value = book.title;
+    author.value = book.author;
+    genre.value = book.genre;
+    pages.value = book.pages;
+
+}
+
 
 // Chage card layout on sort-by selection
 sortBy.addEventListener('change', () => {
